@@ -15,7 +15,7 @@ NR>1 && pilihan == "b" {gsub(/\r/, "", $4); gerbong[$4]++}
 NR>1 && pilihan == "c" {if ($2 > max) {max = $2; nama = $1}}
 
 #--d--
-NR>1 && pilihan == "d" {sum+=$2; count++} 
+NR>1 && pilihan == "d" {sum+=$2; count++}
 
 #--e--
 NR>1 && pilihan == "e" && $3 == "Business" {kelas++}
@@ -31,5 +31,5 @@ END {
 
       else if (pilihan == "e") print "Jumlah penumpang business class ada", kelas, "orang"
 
-      else print  "Soal tidak dikenali. Gunakan a, b, c, d, atau e."
+      else print  "Soal tidak dikenali. Gunakan a, b, c, d, atau e.\n" "Contoh penggunaan: awk -f KANJ.sh data.csv (a/b/c/d/e)"
 } 
