@@ -1,5 +1,3 @@
-#!/bin/bash
-
 BEGIN {
 	FS=","
 	pilihan = ARGV[2]
@@ -27,7 +25,7 @@ BEGIN {
 
             else if (pilihan == "c") print nama, "adalah penumpang kereta tertua dengan usia", max, "tahun"
 
-            else if (pilihan == "d") printf "Rata-rata usia penumpang adalah %.0f", sum/count, "tahun"
+            else if (pilihan == "d") printf "Rata-rata usia penumpang adalah %.0f tahun", sum/count
 
             else if (pilihan == "e") print "Jumlah penumpang business class ada", kelas, "orang"
 
