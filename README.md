@@ -10,7 +10,7 @@ Silfi Rochmatul Auliyah (5027251008)
 #### Penjelasan 
 Pada soal ini diminta untuk membantu Pak Rusdi, seorang kondektur magang untuk menyusun laporan lengkap mengenai penumpang kereta dengan menganalisis data dalam file `passenger.csv` menggunakan command linux dan awk. 
 
-Pada soal ini diminta untuk menganalisis data sebagai berikut. 
+Analisis data yang diminta untuk laporan adalah sebagai berikut. 
 1. Total penumpang kereta 
 2. Total gerbong kereta
 3. Menemukan penumpang dengan usia tertua di kereta
@@ -27,7 +27,8 @@ BEGIN {
 	delete ARGV[2]
       }
 ```
-Kemudian proses analisis data sebagai  berikut. 
+Kemudian proses analisis data adalah sebagai berikut. 
+
 **a. Menghitung seluruh baris data penumpang dan menyusun laporan**
 Untuk langkah pertama adalah menghitung baris data penumpang dalam file dengan mengecualikan header. 
 ```sh 
