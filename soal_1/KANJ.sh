@@ -29,5 +29,5 @@ BEGIN {
 
             else if (pilihan == "e") print "Jumlah penumpang business class ada", kelas, "orang"
 
-            else print  "Soal tidak dikenali. Gunakan a, b, c, d, atau e.\n" "Contoh penggunaan: awk -f KANJ.sh data.csv (a/b/c/d/e)"
+            else print  "Soal tidak dikenali. Gunakan a, b, c, d, atau e.\n" "Contoh penggunaan: awk -f KANJ.sh passenger.csv (a/b/c/d/e)"
 } 
