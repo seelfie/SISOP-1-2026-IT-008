@@ -1,7 +1,10 @@
 #!/bin/bash
 
 if [ "$1" == "--check-tagihan" ]; then
-    awk -F',' '$5=="Menunggak" {print $1 " menunggak"}' data/penghuni.csv >> log/tagihan.log
+    awk -F',' '$5=="Menunggak" {cmd = "date \"+[%Y-%m-%d %H:%M:%S]\""
+        cmd | getline timestamp
+        close(cmd)
+        print timestamp " TAGIHAN: " $1 " (Kamar " $2 ") - Menunggak Rp" $3}' data/penghuni.csv >> log/tagihan.log #revisi format log
     exit 0
 fi
 
@@ -88,7 +91,7 @@ while true; do
             
             grep -v "$nama" data/penghuni.csv > tmp.csv
             mv tmp.csv data/penghuni.csv
-            echo "Data penghuni \"$nama\" berhasil diarsipkan ke sampah/history.csv dan dihapus dari sistem."
+            echo "Data penghuni \"$nama\" berhasil diarsipkan ke sampah/history_hapus.csv dan dihapus dari sistem."
             echo "Tekan [ENTER] untuk kembali ke menu..."
             read
         else 

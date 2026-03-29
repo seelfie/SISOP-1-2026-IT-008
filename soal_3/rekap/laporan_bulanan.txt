@@ -2,9 +2,9 @@
                LAPORAN KEUANGAN KOST SLEBEW                
 ===========================================================
 Total pemasukan (Aktif) : Rp2.400.000
-Total tunggakan         : Rp500.000
+Total tunggakan         : Rp900.000
 Jumlah kamar terisi     : 4
 -----------------------------------------------------------
  Daftar penghuni menunggak:
-   - sotong
+   - furina
 ===========================================================
