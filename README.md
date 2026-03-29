@@ -61,7 +61,9 @@ Kemudian proses analisis data adalah sebagai berikut.
 ```
 
 Berikut penjelasan mengenai setiap bagian analisis data.
+
 **a. Menghitung seluruh baris data penumpang dan menyusun laporan**
+
 Untuk langkah pertama dalam analisis data adalah menghitung baris data penumpang dalam file dengan mengecualikan header. 
 ```sh 
 NR>1 && pilihan == "a" {count++}
@@ -72,6 +74,7 @@ if (pilihan == "a") print "Jumlah seluruh penumpang KANJ adalah", count, "orang"
 ```
 
 **b. Menghitung total gerbong kereta**
+
 Untuk langkah keduanya adalah menghitung jumlah gerbong KANJ dalam file dengan menyimpan nilai setiap gerbong dan mengecualikan header. Nilai  setiap gerbong disimpan sebagai kunci di dalam array gerbong[] agar tidak terhitunng dua kali. 
 ```sh
 NR>1 && pilihan == "b" {gsub(/\r/, "", $4); gerbong[$4]++}
@@ -82,6 +85,7 @@ else if (pilihan == "b") print "Jumlah gerbong penumpang KANJ adalah", length(ge
 ```
 
 **c. Menemukan penumpang dengan usia tertua di kereta**
+
 Untuk langkah ketiga adalah membandingkan usia setiap penumpang kereta untuk menemukan penumpang dengan usia tertua. 
 ```sh
 NR>1 && pilihan == "c" {if ($2 > max) {max = $2; nama = $1}}
@@ -92,6 +96,7 @@ else if (pilihan == "c") print nama, "adalah penumpang kereta tertua dengan usia
 ```
 
 **d. Menghitung rata-rata usia penumpang kereta**
+
 Untuk langkah keempat adalah menghitung rata-rata usia dengan menghitung baris usia dan baris total penumpang kemudian membaginya. 
 ```sh
 NR>1 && pilihan == "d" {sum+=$2; count++}
@@ -102,6 +107,7 @@ else if (pilihan == "d") printf "Rata-rata usia penumpang adalah %.0f tahun", su
 ```
 
 **e. Menghitung jumlah penumpang business class**
+
 Untuk langkah kelima adalah menghitung jumlah penumpang business class dengan memfilter baris kelas bernilai "Business". 
 ```sh
 NR>1 && pilihan == "e" && $3 == "Business" {kelas++}
@@ -122,16 +128,27 @@ else print  "Soal tidak dikenali. Gunakan a, b, c, d, atau e.\n" "Contoh penggun
 ![alt text](assets/soal_1/unduh_csv.png)
 
 2. opsi a - menampilkan laporan jumlah seluruh penumpang KANJ
+
 ![alt text](assets/soal_1/a_JumlahPenumpang.png)
+
 3. opsi b - menampilkan laporan jumlah gerbong KANJ
+
 ![alt text](assets/soal_1/b_JumlahGerbong.png)
+
 4. opsi c - menampilkan laporan penumpang tertua KANJ
+
 ![alt text](assets/soal_1/c_PenumpangTertua.png)
+
 5. opsi d - menampilkan laporan rata-rata usia penumpang 
+
 ![alt text](assets/soal_1/d_rata2usia.png)
+
 6. opsi e - menampilkan laporan jumlah penumpang business class
+
 ![alt text](assets/soal_1/e_PenumpangBusinessClass.png)
+
 7. Jika memasukkan opsi selain a/b/c/d/e
+
 ![alt text](assets/soal_1/TidakSesuaiOpsi.png)
 
 #### Kendala
@@ -158,6 +175,7 @@ git clone https://github.com/pocongcyber77/peta-gunung-kawi.git
 Dari repository yang diunduh terdapat file gsxtrack.json yang berisi titik lokasi bekas ekspedisi sebelumnya. Lokasi benda pusaka yang dicari tepat berada di titik tengah lokasi-lokasi tersebut. Oleh karena itu, untuk mendapatkan titik tengah tersebut diperlukan mengekstrak data titik lokasi agar lebih mudah dibaca kemudian menentukan titik tengahnya dengan bantuan awk. 
 
 **a. Parsing titik koordinat**
+
 File gsxtrack.json diekstrak dengan membuat script `parserkoordinat.sh` dan menggunakan awk dengan regex. Di sini awk mencocokkan setiap field yang berada di baris terpisah dengan mencocokkan pola kemudian mengambil nilainya. Nilai yang akan diambil dari file json ada empat di antaranya id, site_name, latitude, dan longitude. Keempat nilai tersebut akan digabung dan disimpan dalam satu baris. Kemudian setiap nilai yang cocok akan disimpan ke dalam file baru bernama `titik-penting.txt` dengan format id,site_name,latitude,longitude.
 ```shell
 awk '/"id"/ {gsub(/.*"id": "|",/, "", $0); id = $0} \
@@ -168,6 +186,7 @@ awk '/"id"/ {gsub(/.*"id": "|",/, "", $0); id = $0} \
 ```
 
 **b. Menentukan titik pusat**
+
 Berdasarkan file gsxtrack.json, keempat titik koordinat yang ada membentuk sebuah persegi. Oleh karena itu, untuk menemukan titik pusat dari keempat titik tersebut dapat menggunakan rumus titik tengah persegi. 
 $$\left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$$
 Koordinat yang  digunakan merupakan koordinat yang saling berseberangan. Pada rumus tersebut longitude bernilai sama dengan x dan latitude sama dengan y. Setelah menghitung titik tengah, outputnya akan disimpan ke dalam file `posisipusaka.txt` dengan format (Latitude, Longitude).
