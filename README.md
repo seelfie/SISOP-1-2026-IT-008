@@ -188,7 +188,9 @@ awk '/"id"/ {gsub(/.*"id": "|",/, "", $0); id = $0} \
 **b. Menentukan titik pusat**
 
 Berdasarkan file gsxtrack.json, keempat titik koordinat yang ada membentuk sebuah persegi. Oleh karena itu, untuk menemukan titik pusat dari keempat titik tersebut dapat menggunakan rumus titik tengah persegi. 
+
 $$\left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$$
+
 Koordinat yang  digunakan merupakan koordinat yang saling berseberangan. Pada rumus tersebut longitude bernilai sama dengan x dan latitude sama dengan y. Setelah menghitung titik tengah, outputnya akan disimpan ke dalam file `posisipusaka.txt` dengan format (Latitude, Longitude).
 ```shell
 awk -F',' 'NR == 1 {lat1=$3; lon1=$4}
