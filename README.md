@@ -233,7 +233,9 @@ while true; do
 ```
 
 Langkah selanjutnya adalah membuat script untuk setiap opsi yang ada. Berikut penjelasan masing-masing opsi pada menu sistem manajemen kost  slebew. 
+
 **1.Tambah penghuni baru**
+
 Fitur yang pertama adalah fitur untuk menambah penghuni baru. Pada fitur ini membutuhkan input nama, kamar, harga sewa, tanggal masuk, dan status awal. 
 ```shell
 if [ "$pilihan" == "1" ]; then
@@ -282,7 +284,9 @@ if [ "$pilihan" == "1" ]; then
         echo "Penghuni $nama berhasil ditambahkan ke kamar $kamar dengan status $status."
 ```
 Pada fitur ini terdapat beberapa validasi di antaranya.
+
 a. Validasi format tanggal
+
 Format tanggal tidak boleh melebihi hari ini dan harus dalam format (YYYY-MM-DD)
 ```shell
 	if ! echo "$tanggal" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
@@ -291,6 +295,7 @@ Format tanggal tidak boleh melebihi hari ini dan harus dalam format (YYYY-MM-DD)
             fi
 ```
 b. Validasi harga
+
 Harga yang dimasukkan haruslah angka positif dan tidak boleh negatif.
 ```shell
  if ! echo "$harga" | grep -qE '^[0-9]+$'; then 
@@ -299,6 +304,7 @@ Harga yang dimasukkan haruslah angka positif dan tidak boleh negatif.
             fi 
 ```
 c. Validasi nomor kamar
+
 Nomor kamar yang dimasukkan harus divalidasi agar mengetahui apakah kamar tersebut tersedia atau telah disewa penghuni lain. 
 ```shell
 if grep -q ",$kamar," data/penghuni.csv; then
@@ -309,6 +315,7 @@ if grep -q ",$kamar," data/penghuni.csv; then
             fi
 ```
 d. Validasi status
+
 Status yang dimasukkan harus sesuai aturan yakni Aktif/Menunggak.
 ```shell
 if [ "$status" != "Aktif" ] && [ "$status" != "Menunggak" ]; then
@@ -320,6 +327,7 @@ if [ "$status" != "Aktif" ] && [ "$status" != "Menunggak" ]; then
 Data yang sudah divalidasi kemudian akan disimpan ke dalam `data/penghuni.csv`.
 
 **2. Hapus Penghuni**
+
 Fitur ini berfungsi untuk menghapus baris data penghuni yang pindah. Namun, sebelum dihapus data penghuni lama akan dipindahkan ke dalam `sampah/history_hapus.csv` dengan tanggal penghapusan di kolom paling belakang. 
 ```shell
 elif [ "$pilihan" == "2" ]; then 
@@ -344,6 +352,7 @@ elif [ "$pilihan" == "2" ]; then
 ```
 
 **3. Tampilkan Daftar Penghuni**
+
 Fitur ini berfungsi untuk menampilkan daftar penghuni kost yang memanfaatkan awk untuk memformat file mentah menjadi sebuah tabel yang mudah dibaca. Selain itu, untuk harga sewa angkanya diubah menggunakan fungsi format_harga agar dapat memisahkan setiap 3 digit dengan operasi `%` dan menambahkan Rp di depannya. 
 ```shell
 elif [ "$pilihan" == "3" ]; then 
@@ -380,7 +389,9 @@ elif [ "$pilihan" == "3" ]; then
         echo "Tekan [ENTER] untuk kembali ke menu..."
         read
 ```
+
 **4. Update Status Penghuni**
+
 Fitur ini berfungsi mengubah status menjadi Aktif/Menunggak dengan meminta inputan nama penghuni yang statusnya akan diubah.
 ```shell
 elif [ "$pilihan" == "4" ]; then 
@@ -413,6 +424,7 @@ elif [ "$pilihan" == "4" ]; then
 ```
 
 **5. Cetak Laporan Keuangan**
+
 Fitur ini berfungsi sebagai laporan keuangan yang menghitung total pemasukan dan tunggakan kemudian menyimmpan hasilnya di file `rekap/laporan_bulanan.txt`.
 ```shell
 elif [ "$pilihan" == "5" ]; then 
@@ -451,6 +463,7 @@ elif [ "$pilihan" == "5" ]; then
         read
 ```
 **6. Kelola Cron (Pengingat Tagihan)**
+
 Fitur ini berfungsi untuk membuat pengingat tagihan dan mengetahui penghuni yang masih menunggak. Script ini dapat dipanggil dengan menggunakan argumen `--check-tagihan` dan setiap jadwal pengingat itu berjalan akan mencatat penghuni yang menunggak ke dalam file `log/tagihan.log`. 
 
 Fitur ini memiliki menu kelola cron yang terdiri dari lihat cron job aktif, daftarkan cron job, hapus cron job, dan kembali. Menu ini akan melakukan looping hingga pengguna memilih opsi kembali. 
@@ -551,46 +564,65 @@ fi
 
 2. Opsi 1
 	- Tambah penghuni baru 
+
 	![opsi1](assets/soal_3/opsi1.png)
 
 	- Format tanggal tidak sesuai / melebihi hari ini
+
 	![alt text](assets/soal_3/TanggalNonValid.png)
 
 	- Format harga tidak valid
+
 	![alt text](assets/soal_3/HargaNonValid.png)
 
 	- Jika kamar tidak tersedia / telah disewa
+
 	![alt text](assets/soal_3/KamarTidakTersedia.png)
 
 	- Jika status tidak valid
+
 	![alt text](assets/soal_3/StatusInvalid.png)
 
 3.  Opsi 2 - Hapus Penghuni 
+
 ![alt text](assets/soal_3/opsi2.png)
 
 4. Riwayat hapus penghuni 
+
 ![alt text](assets/soal_3/history_hapus.png)
 
 5. Opsi 3 - Daftar penghuni kost 
+
 ![alt text](assets/soal_3/opsi3.png)
 
 6. Opsi 4 - Update Status
+
 ![alt text](assets/soal_3/opsi4.png)
 
 7. Opsi 5 - Laporan keuangan
+
 ![alt text](assets/soal_3/opsi5.png)
 
 8. Opsi 6 - Cronjob Pengingat Tagihan
+
 	- Menu utama 
+
 	![alt text](assets/soal_3/MenuCron.png)
+
 	- Daftarkan cronjob
+
 	![alt text](assets/soal_3/DaftarkanCron.png)
+
 	- Lihat cronjob aktif
+
 	![alt text](assets/soal_3/CronjobAktif.png)
+
 	- Hapus cronjob
+
 	![alt text](assets/soal_3/HapusCronjob.png)
 
 9. Opsi 7 - Keluar program
+
 ![alt text](assets/soal_3/opsi7.png)
 
 #### Revisi
